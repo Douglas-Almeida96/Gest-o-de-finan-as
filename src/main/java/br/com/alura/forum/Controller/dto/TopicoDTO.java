@@ -1,10 +1,9 @@
 package br.com.alura.forum.Controller.dto;
 
 import br.com.alura.forum.modelo.Topico;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class TopicoDTO {
     private Long id;
@@ -20,8 +19,8 @@ public class TopicoDTO {
     }
 
     ///entender melhor esta parte!
-    public static List<TopicoDTO> coverter(List<Topico> topicos) {
-        return  topicos.stream().map(TopicoDTO :: new).collect(Collectors.toList());
+    public static Page<TopicoDTO> coverter(Page<Topico> topicos) {
+        return  topicos.map(TopicoDTO::new);
     }
 
     public Long getId() {

@@ -4,6 +4,7 @@ import br.com.alura.forum.modelo.StatusTopico;
 import br.com.alura.forum.modelo.Topico;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,8 +25,8 @@ public class DetalhesDoTopicoDto {
         this.dataCriacao = topico.getDataCriacao();
         this.nomeAutor = topico.getAutor().getNome();
         this.status = topico.getStatus();
-        this.repostas.addAll(topico.getRespostas().stream()
-                .map(RespostaDto ::new).collect(Collectors.toList()));
+        this.repostas = new ArrayList<>();
+        this.repostas.addAll(topico.getRespostas().stream().map(RespostaDto ::new).collect(Collectors.toList()));
     }
 
     public Long getId() {
