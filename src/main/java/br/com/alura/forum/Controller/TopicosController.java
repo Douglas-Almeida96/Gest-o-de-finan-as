@@ -10,6 +10,9 @@ import br.com.alura.forum.service.CursoService;
 import br.com.alura.forum.service.TopicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -31,8 +34,8 @@ public class TopicosController {
 
     @GetMapping
     public Page<TopicoDTO> lista(@RequestParam(required = false) String nomeCurso,
-                                 @RequestParam int pagina, @RequestParam int qtd) {
-        Page<Topico> topicos = service.filter(nomeCurso,pagina, qtd);
+        @PageableDefault(sort = "id",page = 0,size = 10,direction = Sort.Direction.DESC)  Pageable pageable) {
+        Page<Topico> topicos = service.filter(nomeCurso, pageable);
         return TopicoDTO.coverter(topicos);
     }
 

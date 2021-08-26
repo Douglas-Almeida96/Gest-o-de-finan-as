@@ -19,19 +19,18 @@ public class TopicoService {
     @Autowired
     TopicoRepository repository;
 
-    public Page<Topico> findAll(Pageable paginacao) {
-        Page<Topico> topicos = repository.findAll(paginacao);
+    public Page<Topico> findAll(Pageable pageable) {
+        Page<Topico> topicos = repository.findAll(pageable);
         return topicos;
     }
 
-    public Page<Topico> filter(String nomeCurso, int pagina, int qtd) {
-        Pageable paginacao = PageRequest.of(pagina, qtd);
+    public Page<Topico> filter(String nomeCurso,Pageable pageable) {
 
         Page<Topico> topicos;
         if (nomeCurso == null) {
-            return topicos = findAll(paginacao);
+            return topicos = findAll(pageable);
         } else {
-            return topicos = repository.findByCurso_Nome(nomeCurso, paginacao);
+            return topicos = repository.findByCurso_Nome(nomeCurso, pageable);
         }
     }
 
