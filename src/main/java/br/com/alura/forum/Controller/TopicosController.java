@@ -73,7 +73,7 @@ public class TopicosController {
 
     @DeleteMapping("/{id}")
     @CacheEvict(value = "Listar", allEntries = true)
-    public ResponseEntity<Object> atualizar(@PathVariable Long id) {
+    public ResponseEntity<Object> deletar(@PathVariable Long id) {
         service.deleteById(id);
         return ResponseEntity.ok().build();
     }
